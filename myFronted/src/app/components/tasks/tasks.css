@@ -1,0 +1,367 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #0f172a;
+  color: #fff;
+  padding: 2rem;
+  direction: rtl;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- רקע ואווירה --- */
+.ambient-glow {
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 40%, transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  animation: pulseGlow 10s infinite alternate;
+}
+
+.tasks-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- כותרת ראשית --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.title-wrapper h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  padding-top: 0.12em;
+  padding-bottom: 0.12em;
+  display: inline-block;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+
+/* --- כפתור יצירה --- */
+.create-btn {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(79, 70, 229, 0.6);
+}
+
+/* --- Overlay לטופס יצירה --- */
+.form-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* --- גריד המשימות --- */
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2.5rem;
+  align-items: start; /* חשוב כדי שכרטיסים לא ימתחו סתם */
+}
+
+/* --- כרטיס משימה (החלק החשוב) --- */
+.task-card {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  position: relative;
+  /* ביטלנו height קבוע לטובת גובה דינמי */
+  min-height: 350px;
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: floatIn 0.6s ease-out forwards;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* מצב מורחב - כשהתגובות פתוחות */
+.task-card.is-expanded {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.card-gradient-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+}
+
+.card-content {
+  padding: 2rem 2rem 0 2rem;
+  flex: 1; /* דוחף את הפוטר למטה */
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.task-avatar {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+}
+
+.status-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.done {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+
+.task-card h3 {
+  font-size: 1.6rem;
+  margin: 0 0 1rem 0;
+  color: #f8fafc;
+}
+
+.task-description {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* שורת הסטטיסטיקה (פרויקט + ID) */
+.stats-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.stat-value { font-size: 1.1rem; font-weight: 700; color: #fff; }
+.stat-label { font-size: 0.75rem; color: #64748b; }
+.divider { width: 1px; height: 24px; background: rgba(255,255,255,0.1); }
+
+.task-editors {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.task-editor {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.task-editor-label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.task-editor-select {
+  background: rgba(2, 6, 23, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.task-editor-select:focus {
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+  background: rgba(2, 6, 23, 0.5);
+}
+
+.task-editor-select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .task-editors { flex-direction: column; }
+}
+
+/* --- Footer הפעולות --- */
+.card-actions {
+  background: rgba(2, 6, 23, 0.3);
+  padding: 1.2rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-actions-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.action-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* כפתורי הפעולה */
+.complete-btn {
+  background: transparent;
+  border: none;
+  color: #6366f1;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.complete-btn:hover { background: rgba(99, 102, 241, 0.1); }
+
+.comment-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.comment-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* סיבוב האייקון כשהתגובות פתוחות */
+.task-card.is-expanded .comment-trigger svg {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.delete-btn {
+  background: rgba(239, 68, 68, 0.1);
+  border: none;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #ef4444;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.delete-btn:hover { background: rgba(239, 68, 68, 0.2); transform: scale(1.05); }
+
+/* --- אזור התגובות הנפתח --- */
+.comments-section-container {
+  padding: 0; /* הקומפוננטה הפנימית תטפל ב-padding */
+  background: rgba(15, 23, 42, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- אנימציות --- */
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); max-height: 0; }
+  to { opacity: 1; transform: translateY(0); max-height: 500px; }
+}
+
+/* --- מצב ללא נתונים --- */
+.no-data {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 24px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}

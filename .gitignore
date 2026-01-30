@@ -1,0 +1,26 @@
+# --- Dependencies ---
+# זה יחסום את תיקיות הספרייות הכבדות מכל הפרויקט
+**/node_modules/
+
+# --- Angular (myFronted) ---
+# חוסם קבצי בנייה זמניים של אנגולר
+**/myFronted/.angular/
+**/myFronted/dist/
+**/myFronted/tmp/
+
+# --- Server (WolfTasksServer-main) ---
+# חוסם קבצי מסד נתונים זמניים של SQLite שלא אמורים לעלות
+**/WolfTasksServer-main/*.sqlite
+**/WolfTasksServer-main/*.sqlite-wal
+**/WolfTasksServer-main/*.sqlite-journal
+
+# --- IDE & OS ---
+# חוסם הגדרות אישיות של ה-VS Code שלך
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Security ---
+# חוסם קבצי הגדרות סודיים (אם יהיו כאלה בעתיד)
+.env

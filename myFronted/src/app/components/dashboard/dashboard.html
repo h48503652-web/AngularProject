@@ -1,0 +1,187 @@
+<!-- <div class="dashboard-page">
+  <div class="ambient-glow"></div>
+
+  <div class="header">
+    <div class="title-wrapper">
+      <h2>לוח הבקרה</h2>
+      <p class="subtitle">סקירה בזמן אמת של ביצועי הצוותים</p>
+    </div>
+    <div class="date-badge">
+      {{ now | date:'EEEE, d MMMM' }}
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p>מעבד נתונים...</p>
+    </div>
+  } @else {
+    
+    <div class="stats-grid">
+      
+      <div class="stat-card purple">
+        <div class="card-bg-glow"></div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">פרויקטים פעילים</span>
+          <h3 class="stat-value">{{ totalProjects() }}</h3>
+        </div>
+      </div>
+
+      <div class="stat-card blue">
+        <div class="card-bg-glow"></div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"></path></svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">משימות לביצוע</span>
+          <h3 class="stat-value">{{ pendingTasks() }}</h3>
+        </div>
+      </div>
+
+      <div class="stat-card pink">
+        <div class="card-bg-glow"></div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">אחוז השלמה</span>
+          <h3 class="stat-value">{{ completionRate() }}%</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-section">
+      <div class="section-header">
+        <h3>פעילות אחרונה</h3>
+        <a routerLink="/tasks" class="view-all">לכל המשימות →</a>
+      </div>
+
+      <div class="activity-list">
+        @for (let task of recentTasks()) {
+          <div class="activity-item">
+            <div class="status-indicator" [class.done]="task.status === 'done'"></div>
+            <div class="activity-info">
+              <span class="activity-title">{{ task.title }}</span>
+              <span class="activity-meta">פרויקט #{{ task.project_id }}</span>
+            </div>
+            <div class="activity-status">
+              {{ task.status === 'done' ? 'בוצע' : 'בתהליך' }}
+            </div>
+          </div>
+        } @empty {
+          <div class="empty-state">
+            <p>אין פעילות אחרונה להציג.</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div> -->
+
+<div class="dashboard-container">
+  <div class="grid-ambient"></div>
+  <div class="light-flares"></div>
+
+  <div class="content-wrapper">
+    <header class="main-header">
+      <div class="header-content">
+        <h1>סקירת מערכת</h1>
+        <p class="dashboard-intro">NexusFlow היא מערכת לניהול צוותים, פרויקטים ומשימות במקום אחד. כאן תוכל לראות תמונת מצב בזמן אמת, להתעדכן בהתקדמות, ולנווט במהירות לעבודה היומיומית.</p>
+        <p class="date-display">{{ now | date:'EEEE, d MMMM y' }}</p>
+      </div>
+      <div class="user-actions">
+        <div class="live-indicator">
+          <span class="pulse-dot"></span>
+          Live Data
+        </div>
+      </div>
+    </header>
+
+    @if (loading()) {
+      <div class="skeleton-loader">
+        <div class="skeleton-grid"></div>
+        <div class="skeleton-list"></div>
+      </div>
+    } @else {
+      <div class="bento-grid">
+        
+        <div class="bento-card hero-card purple-theme">
+          <div class="card-shine"></div>
+          <div class="card-inner">
+            <div class="card-header">
+              <div class="icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <span class="trend-badge positive">+12% החודש</span>
+            </div>
+            <div class="card-body">
+              <h3>פרויקטים פעילים</h3>
+              <div class="big-number">{{ totalProjects() }}</div>
+            </div>
+            <svg class="mini-chart" viewBox="0 0 200 40" preserveAspectRatio="none">
+              <path d="M0 30 Q 50 5, 100 20 T 200 10" vector-effect="non-scaling-stroke" />
+              <linearGradient id="purple-gradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="rgba(168, 85, 247, 0)" />
+                  <stop offset="100%" stop-color="rgba(168, 85, 247, 0.4)" />
+              </linearGradient>
+              <path class="mini-chart-fill" d="M0 30 Q 50 5, 100 20 T 200 10 V 40 H 0 Z" fill="url(#purple-gradient)" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="bento-card blue-theme">
+          <div class="card-shine"></div>
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>משימות לביצוע</h3>
+            <div class="big-number">{{ pendingTasks() }}</div>
+            <progress class="progress progress--blue" max="100" value="65" aria-label="התקדמות משימות"></progress>
+          </div>
+        </div>
+
+        <div class="bento-card green-theme">
+          <div class="card-shine"></div>
+          <div class="card-inner">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>אחוז השלמה</h3>
+            <div class="big-number">{{ completionRate() }}<small>%</small></div>
+            <progress class="progress progress--green" max="100" [value]="completionRate()" aria-label="אחוז השלמה"></progress>
+          </div>
+        </div>
+
+        <div class="bento-card list-card tall-span">
+          <div class="card-inner">
+            <div class="list-header">
+              <h3>פעילות אחרונה</h3>
+              <a routerLink="/tasks" class="nav-link">הכל →</a>
+            </div>
+            <div class="activity-timeline">
+              @for (task of recentTasks(); track task.id) {
+                <div class="timeline-item">
+                  <div class="timeline-marker" [class.done]="task.status === 'done'"></div>
+                  <div class="timeline-content">
+                    <span class="task-name">{{ task.title }}</span>
+                    <span class="project-meta">פרויקט #{{ task.project_id }}</span>
+                  </div>
+                  <span class="status-pill" [class.done]="task.status === 'done'">
+                    {{ task.status === 'done' ? 'הושלם' : 'פעיל' }}
+                  </span>
+                </div>
+              } @empty {
+                <div class="empty-list">אין פעילות להציג</div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

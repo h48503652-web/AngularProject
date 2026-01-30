@@ -1,0 +1,28 @@
+<aside class="sidebar" [class.collapsed]="collapsed()" role="navigation" aria-label="תפריט ראשי">
+  <div class="sidebar-top">
+    <button class="collapse-btn" (click)="toggleCollapsed()" [attr.aria-expanded]="!collapsed()" aria-label="הסתיר/הצג תפריט">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <a class="brand" routerLink="/dashboard" aria-label="דף ראשי">
+      <div class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="brand-name">NexusFlow</span>
+    </a>
+  </div>
+
+  <ul class="sidebar-links" role="menu">
+    <li role="none"><a role="menuitem" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" aria-label="לוח בקרה"><span class="icon" aria-hidden="true">📊</span><span class="text">לוח בקרה</span></a></li>
+    <li role="none"><a role="menuitem" routerLink="/teams" routerLinkActive="active" aria-label="צוותים"><span class="icon" aria-hidden="true">👥</span><span class="text">צוותים</span></a></li>
+    <li role="none"><a role="menuitem" routerLink="/projects" routerLinkActive="active" aria-label="פרויקטים"><span class="icon" aria-hidden="true">📂</span><span class="text">פרויקטים</span></a></li>
+    <li role="none"><a role="menuitem" routerLink="/tasks" routerLinkActive="active" aria-label="משימות"><span class="icon" aria-hidden="true">⚡</span><span class="text">משימות</span></a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar" aria-hidden="true">{{ userInitials() }}</div>
+      <div class="user-name">{{ userName() }}</div>
+    </div>
+    <button class="logout-btn" (click)="logout()" aria-label="התנתק">התנתק</button>
+  </div>
+</aside>

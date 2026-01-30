@@ -1,0 +1,67 @@
+<div class="projects-page" role="main" aria-label="פרויקטים">
+  <div class="ambient-glow"></div>
+
+  <div class="header">
+    <div class="title-wrapper">
+      <h2>הפרויקטים שלי</h2>
+      <p class="subtitle">ניהול ומעקב אחר פרויקטים בצוותים השונים</p>
+    </div>
+    
+    <button class="create-btn" (click)="showCreateForm.set(true)" aria-label="צור פרויקט חדש">
+      <span class="icon" aria-hidden="true">+</span>
+      <span>פרויקט חדש</span>
+    </button>
+  </div>
+
+  @if (showCreateForm()) {
+    <div class="form-container">
+      <app-create-project 
+         (close)="showCreateForm.set(false)" 
+         (projectCreated)="loadProjects()">
+       </app-create-project>
+    </div>
+  }
+
+  <div class="projects-grid">
+    @for (project of projects(); track project.id) {
+      <div class="project-card" role="article" aria-labelledby="project-title-{{project.id}}">
+        <div class="card-gradient-overlay"></div>
+        
+        <div class="card-content">
+          <div class="card-top">
+            <div class="project-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="team-tag">צוות #{{ project.team_id }}</div>
+          </div>
+          
+          <h3 id="project-title-{{project.id}}">{{ project.name }}</h3>
+          
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-value">פעיל</span>
+              <span class="stat-label">סטטוס</span>
+            </div>
+            <div class="divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">--</span>
+              <span class="stat-label">משימות</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+           <button class="view-btn" (click)="openProjectTasks(project.id)" aria-label="צפה במשימות של {{ project.name }}">
+             צפה במשימות
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+           </button>
+        </div>
+      </div>
+    } @empty {
+      <div class="no-data">
+        <div class="empty-icon">📁</div>
+        <p>עדיין לא נוצרו פרויקטים בצוותים שלך.</p>
+      </div>
+    }
+  </div>
+</div>

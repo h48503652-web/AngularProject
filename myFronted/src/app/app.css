@@ -1,0 +1,38 @@
+/* מוודא שהאפליקציה תופסת את כל המסך */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #0f172a; /* צבע הרקע הראשי של המערכת */
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  /* אם את רוצה שהתוכן יזוז קצת למטה כדי שלא יידבק ל-Header */
+  /* padding-top: 20px; */ 
+}
+
+.app-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.app-toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.app-toast--success { background: #28a745; }
+.app-toast--error { background: #dc3545; }
+.app-toast--info { background: #333; }

@@ -1,0 +1,208 @@
+{
+  "info": {
+    "name": "Team Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "7ec1e3c8-1b66-4f1e-8f31-08f0a0c9abcd"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST /api/auth/register",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"Password1!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","auth","register"]
+            }
+          }
+        },
+        {
+          "name": "POST /api/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"Password1!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","auth","login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teams (protected)",
+      "item": [
+        {
+          "name": "GET /api/teams",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/teams","host":["{{baseUrl}}"],"path":["api","teams"]}
+          }
+        },
+        {
+          "name": "POST /api/teams",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"name\": \"Core Team\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/teams","host":["{{baseUrl}}"],"path":["api","teams"]}
+          }
+        },
+        {
+          "name": "POST /api/teams/:teamId/members",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"userId\": 2,\n  \"role\": \"member\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/teams/1/members","host":["{{baseUrl}}"],"path":["api","teams","1","members"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects (protected)",
+      "item": [
+        {
+          "name": "GET /api/projects",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/projects","host":["{{baseUrl}}"],"path":["api","projects"]}
+          }
+        },
+        {
+          "name": "POST /api/projects",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"teamId\": 1,\n  \"name\": \"Launch\",\n  \"description\": \"Product launch project\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/projects","host":["{{baseUrl}}"],"path":["api","projects"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks (protected)",
+      "item": [
+        {
+          "name": "GET /api/tasks",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/tasks","host":["{{baseUrl}}"],"path":["api","tasks"]}
+          }
+        },
+        {
+          "name": "GET /api/tasks?projectId=1",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/tasks?projectId=1","host":["{{baseUrl}}"],"path":["api","tasks"],"query":[{"key":"projectId","value":"1"}]}
+          }
+        },
+        {
+          "name": "POST /api/tasks",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"projectId\": 1,\n  \"title\": \"Plan campaign\",\n  \"description\": \"Define channels and KPIs\",\n  \"status\": \"todo\",\n  \"priority\": \"high\",\n  \"assigneeId\": 1,\n  \"dueDate\": \"2025-12-31\",\n  \"orderIndex\": 0\n}"},
+            "url": {"raw": "{{baseUrl}}/api/tasks","host":["{{baseUrl}}"],"path":["api","tasks"]}
+          }
+        },
+        {
+          "name": "PATCH /api/tasks/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"status\": \"in_progress\",\n  \"priority\": \"normal\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/tasks/1","host":["{{baseUrl}}"],"path":["api","tasks","1"]}
+          }
+        },
+        {
+          "name": "DELETE /api/tasks/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/tasks/1","host":["{{baseUrl}}"],"path":["api","tasks","1"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Comments (protected)",
+      "item": [
+        {
+          "name": "GET /api/comments?taskId=1",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw": "{{baseUrl}}/api/comments?taskId=1","host":["{{baseUrl}}"],"path":["api","comments"],"query":[{"key":"taskId","value":"1"}]}
+          }
+        },
+        {
+          "name": "POST /api/comments",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{token}}"},
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {"mode":"raw","raw":"{\n  \"taskId\": 1,\n  \"body\": \"Looks good\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/comments","host":["{{baseUrl}}"],"path":["api","comments"]}
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "token", "value": "" }
+  ]
+}

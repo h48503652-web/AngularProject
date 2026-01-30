@@ -1,0 +1,48 @@
+.create-project-container {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.5s ease-out;
+}
+
+.form-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+.icon-wrapper { width: 56px; height: 56px; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #818cf8; }
+.icon-wrapper svg { width: 28px; }
+.form-header h3 { margin: 0; font-size: 1.8rem; color: #fff; }
+.form-header p { margin: 0; color: #94a3b8; }
+
+.input-group { margin-bottom: 1.5rem; }
+.input-group label { display: block; margin-bottom: 0.8rem; color: #e2e8f0; font-size: 0.9rem; }
+
+/* סטייל מיוחד ל-Select */
+.select-wrapper, .input-field-wrapper {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 4px;
+  transition: all 0.3s;
+}
+
+select, input, textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  color: #fff;
+  outline: none;
+}
+
+textarea { resize: none; }
+
+select option { background: #0f172a; color: #fff; }
+
+.actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; }
+.btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; border: none; padding: 0.8rem 1.8rem; border-radius: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 0.8rem 1.8rem; border-radius: 12px; cursor: pointer; }
+
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
