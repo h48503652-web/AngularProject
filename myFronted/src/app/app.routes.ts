@@ -6,15 +6,17 @@ import { Projects } from './components/projects/projects';
 import { Tasks } from './components/tasks/tasks';
 import { Dashboard } from './components/dashboard/dashboard';
 import { authGuard } from './guards/auth.guard';
+import { LandingPage } from './components/landing-page/landing-page';
 
 export const routes: Routes = [
+    {path:'landing' , component:LandingPage},
     {path:'login', component:Login},
     {path:'register' , component:Register},
     {path:'teams' , component:Teams , canActivate: [authGuard]},
     {path: 'projects' , component: Projects, canActivate: [authGuard]},
     {path: 'tasks' , component: Tasks, canActivate: [authGuard]},
     {path:'dashboard' , component:Dashboard, canActivate: [authGuard]},
-    {path:'',redirectTo:'login' , pathMatch:'full'}
+    {path:'',redirectTo:'landing' , pathMatch:'full'}
 ];
 
 

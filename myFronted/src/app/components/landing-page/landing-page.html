@@ -1,0 +1,152 @@
+<div class="landing-page" dir="rtl">
+  
+  <div class="background-glows">
+    <div class="glow-blob purple"></div>
+    <div class="glow-blob blue"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <app-icon name="layers" [size]="32" class="logo-icon"></app-icon>
+      <span>NexusFlow</span>
+    </div>
+    <div class="nav-actions">
+      <a routerLink="/login" class="nav-link">התחברות</a>
+      <a routerLink="/register" class="btn-primary small">התחל בחינם</a>
+    </div>
+  </nav>
+
+  <header class="hero-section">
+    <div class="hero-content">
+      <div class="badge-pill">
+        <span class="dot"></span>
+        גרסה 2.0 זמינה כעת
+      </div>
+      <h1>
+        ניהול פרויקטים <br>
+        <span class="text-gradient">מחוץ לגבולות הדמיון</span>
+      </h1>
+      <p class="hero-subtitle">
+        הפלטפורמה שמאחדת צוותים, משימות ויעדים במרחב עבודה אחד, זורם ומעוצב.
+        תפסיקו לרדוף אחרי הזמן, תתחילו לנהל אותו.
+      </p>
+      
+      <div class="cta-group">
+        <a routerLink="/register" class="btn-primary">
+          <span>נסה עכשיו בחינם</span>
+          <app-icon name="arrow-right" [size]="18"></app-icon>
+        </a>
+        <a href="#features" class="btn-secondary">
+          <app-icon name="zap" [size]="18"></app-icon>
+          <span>איך זה עובד?</span>
+        </a>
+      </div>
+
+      <div class="trusted-by">
+        <span>בשימוש על ידי הצוותים הטובים ביותר</span>
+        <div class="avatars-row">
+           <div class="user-bubble" style="background-image: url('https://i.pravatar.cc/100?img=1')"></div>
+           <div class="user-bubble" style="background-image: url('https://i.pravatar.cc/100?img=5')"></div>
+           <div class="user-bubble" style="background-image: url('https://i.pravatar.cc/100?img=8')"></div>
+           <div class="user-bubble count">+2k</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="glass-card-mockup">
+        <div class="mockup-header">
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-sidebar"></div>
+          <div class="mockup-content">
+             <div class="skeleton-line title"></div>
+             <div class="skeleton-grid">
+               <div class="skeleton-card"></div>
+               <div class="skeleton-card"></div>
+               <div class="skeleton-card"></div>
+             </div>
+          </div>
+          <div class="floating-badge success">
+            <app-icon name="check" [size]="16"></app-icon>
+            משימה הושלמה!
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="features-section">
+    <div class="section-header">
+      <h2>כל הכלים להצלחה</h2>
+      <p>בנינו את NexusFlow כדי שתתאים לדרך שבה המוח שלך עובד.</p>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card span-2">
+        <div class="card-icon"><app-icon name="users" [size]="28"></app-icon></div>
+        <h3>שיתוף פעולה בזמן אמת</h3>
+        <p>עבדו יחד על פרויקטים, הגיבו למשימות וראו מי עושה מה בכל רגע נתון.</p>
+        <div class="visual-accent gradient-1"></div>
+      </div>
+
+      <div class="bento-card">
+        <div class="card-icon"><app-icon name="zap" [size]="28"></app-icon></div>
+        <h3>מהירות אור</h3>
+        <p>ממשק שעובד מהר יותר מהמחשבה שלך.</p>
+      </div>
+
+      <div class="bento-card">
+        <div class="card-icon"><app-icon name="book" [size]="28"></app-icon></div>
+        <h3>תיעוד חכם</h3>
+        <p>כל המידע והקבצים של הפרויקט במקום אחד.</p>
+      </div>
+
+      <div class="bento-card span-3">
+        <div class="flex-row">
+          <div>
+            <div class="card-icon"><app-icon name="home" [size]="28"></app-icon></div>
+            <h3>דשבורד שרואה הכל</h3>
+            <p>תמונת מצב מלאה על כל הצוותים והפרויקטים שלך במסך אחד.</p>
+          </div>
+          <div class="mini-chart-visual">
+            <div class="bar" style="height: 40%"></div>
+            <div class="bar" style="height: 70%"></div>
+            <div class="bar" style="height: 50%"></div>
+            <div class="bar active" style="height: 100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-banner">
+    <div class="stat-item">
+      <span class="number">10k+</span>
+      <span class="label">משימות נוצרו</span>
+    </div>
+    <div class="divider"></div>
+    <div class="stat-item">
+      <span class="number">500+</span>
+      <span class="label">צוותים פעילים</span>
+    </div>
+    <div class="divider"></div>
+    <div class="stat-item">
+      <span class="number">99%</span>
+      <span class="label">שביעות רצון</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <app-icon name="layers" [size]="24"></app-icon>
+        <span>NexusFlow</span>
+      </div>
+      <p>© 2026 NexusFlow. נבנה באהבה וקוד.</p>
+    </div>
+  </footer>
+
+</div>

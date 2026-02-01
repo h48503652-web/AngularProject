@@ -19,7 +19,7 @@ export class Toast {
         setTimeout(() => el.remove(), 200);
       }, duration);
     } catch (e) {
-      // fallback
+      
       alert(message);
     }
   }
