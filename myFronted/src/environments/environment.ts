@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://nexus-flow-server.onrender.com/api'
+  apiBaseUrl: 'http://localhost:3000/api'
 };

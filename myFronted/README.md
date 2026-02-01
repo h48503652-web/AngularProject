@@ -1,88 +1,94 @@
-# MyFronted
+🚀 NexusFlow - System for Team & Task Management
+NexusFlow היא פלטפורמה מודרנית לניהול פרויקטים ומשימות בזמן אמת, המיועדת לצוותים שרוצים לשפר את הפרודוקטיביות והסדר בארגון. המערכת מאפשרת ניהול היררכי של צוותים, פרויקטים ומשימות עם ממשק משתמש מתקדם וחוויית שימוש חלקה.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+✨ תכונות עיקריות (Key Features)
+ניהול היררכי: הקמת צוותים, שיוך פרויקטים לצוותים ויצירת משימות מפורטות.
 
-# MyFronted — Frontend (Angular)
+לוח בקרה (Dashboard): סקירה כללית של ביצועים, אחוזי השלמה ופעילות אחרונה.
 
-מדריך קצר ומעשי להרצת ותחזוקת פרונטאנד הפרויקט.
+ניהול משימות חכם: עריכת סטטוס (Todo/In Progress/Done), עדיפויות ותאריכי יעד.
 
-קבצי מקור עיקריים:
-- מקור: `src/` — רכיבים, שירותים, אינטרספטורים
-- תצורה: `src/environments/environment.ts` ו־`environment.prod.ts`
-- תיעוד API: `docs/API.md` (שרת: `WolfTasksServer-main/docs/API.md`)
+שיתוף פעולה: מערכת תגובות מובנית לכל משימה לשיח צוותי.
 
-Prerequisites
-- Node 18+ ו‑npm
-- Angular CLI (מומלץ, לא חובה אם משתמשים ב‑npm scripts)
+ממשק משתמש (UI): עיצוב Dark Mode מודרני, מבוסס זכוכית (Glassmorphism) עם אנימציות חלקות.
 
-התקנה והרצה בפיתוח
-1. התקנת תלויות:
+אבטחה: מערכת הרשמה והתחברות (Authentication) מאובטחת.
 
-```bash
-cd myFronted
+🛠 טכנולוגיות (Tech Stack)
+Frontend
+Angular 18/20: שימוש ב-Signals, Standalone Components ו-Reactive Forms.
+
+CSS3: עיצוב מתקדם, Flexbox/Grid ואנימציות מותאמות אישית.
+
+Lucide/SVG Icons: מערכת אייקונים וקטורית וקלה.
+
+Backend
+Node.js & Express: שרת API מהיר ויציב.
+
+PostgreSQL: בסיס נתונים רלציוני לניהול המידע.
+
+Render: אירוח (Hosting) של השרת והקליינט.
+
+🚀 הרצה מקומית (Getting Started)
+דרישות קדם:
+Node.js מותקן
+
+Angular CLI מותקן
+
+שלבי התקנה:
+שיבוט הפרויקט:
+
+Bash
+git clone https://github.com/h48503652-web/AngularProject
+cd nexus-flow
+התקנת תלויות:
+
+Bash
+# עבור השרת
+cd server
 npm install
-```
 
-2. הרצת שרת פיתוח:
+# עבור הקליינט
+cd ../client
+npm install
+הרצת הפרויקט:
 
-```bash
-npm run start
-# או
+Bash
+# הפעלת השרת
+node server.js
+
+# הפעלת האנגולר (בטרמינל נפרד)
 ng serve
-```
+האתר יהיה זמין בכתובת: http://localhost:4200
 
-פתחו את: `http://localhost:4200/`.
+📂 מבנה הפרויקט (Project Structure)
+Plaintext
+nexus-flow/
+├── client/                # Angular Frontend
+│   ├── src/app/
+│   │   ├── components/    # Reusable UI Components
+│   │   ├── services/      # API & Logic Services
+│   │   └── environments/  # Prod/Dev configurations
+├── server/                # Node.js Backend
+│   ├── server.js          # API Routes & Express Config
+│   └── database/          # SQL Schemas & DB Logic
+└── README.md
 
-הגדרת API (environment)
-- כתובת ה‑API נקבעת ב־`src/environments/environment.ts` באמצעות השדה `apiBaseUrl`.
-- דוגמה (dev):
+## 📸 System Snapshots
 
-```ts
-export const environment = {
-	production: false,
-	apiBaseUrl: 'http://localhost:3000/api'
-};
-```
+### 📊 Real-time Dashboard
 
-הערה: הפרויקט משתמש ב־`sessionStorage` בלבד לאחסון ה‑JWT (אין שימוש ב‑localStorage).
+התחברות והרשמה בכניסה למערכת .
+![Login Screenshot](path/to/login.png)
 
-מבנה ופיצ'רים חשובים (מה שמוממש את הדרישות)
-- Authentication: `src/app/services/auth.ts` — `login`, `register`, `logout`, `getToken`, `currentUser`.
-- Interceptor: `src/app/interceptors/auth-interceptor.ts` — מוסיף `Authorization: Bearer <token>`, מטפל ב‑401/403.
-- Guard: `src/app/guards/auth.guard.ts` — מגן על ראוטים פרטיים.
-- Screens / Components:
-	- `src/app/components/login` — Login
-	- `src/app/components/register` — Register
-	- `src/app/components/teams` — Teams (list, create, add member)
-	- `src/app/components/projects` — Projects (list, create)
-	- `src/app/components/tasks` — Tasks (list per project, create/update/delete)
-	- `src/app/components/comments` — Comments (list/add)
-- Environments: `src/environments/environment.ts`, `environment.prod.ts`.
+סקירה מקיפה של התקדמות הפרויקטים והמשימות הפתוחות.
+![Dashboard Screenshot](path/to/dashboard.png)
 
-מה מומלץ לבדוק ידנית אחרי הרצה
-1. התחברות: וודאו ש־sessionStorage מכיל `token` לאחר login.
-2. קריאות מוגנות: בתעבורת הרשת (Network) בדקו שכל בקשה ל־`/api/*` כוללת header `Authorization: Bearer <token>`.
-3. Logout: לאחר logout אין token ב־sessionStorage וה־guard מנווט ל־/login.
+### ✅ Task Management
+מערכת גריד חכמה לניהול משימות, כולל סינון, עריכה ומעקב סטטוס.
+![Tasks Screenshot](path/to/TASKS!.PNG)
 
-פיתוח נוסף מומלץ (אופציונלי)
-- להוסיף בדיקות E2E (Cypress/Playwright) לכיסוי זרימות: login → teams → projects → tasks → comments.
-- להריץ Lighthouse/axe לאaudit נגישות ולשפר ARIA/contrast בהתאם.
-- להוסיף מדיניות טיפול בטעויות 500/404 מרכזית או Retry/Backoff במקום שבו זה רלוונטי.
+![alt text](CREATETASKS!.PNG)
 
-מדריך פריסה מהיר (production)
-1. עדכון `src/environments/environment.prod.ts` עם כתובת ה‑API הייצורית.
-2. בנייה לפרודקשן:
-
-```bash
-npm run build
-# או
-ng build --configuration production
-```
-
-3. פרסו את תיקיית ה־`dist` בהתאם לפלטפורמת ה‑hosting שלכם (Netlify/Render/Vercel/NGINX).
-
-קישורים שימושיים
-- תיעוד ה‑API (שרת): `WolfTasksServer-main/docs/API.md`.
-
-אם תרצה, אעדכן את ה־README עם הוראות פריסה מפורטות ל‑Render, אוסיף דוגמאות `curl` שימושיות להפעלת API מקומית, או אצרף סקריפט `npm run health` שיבדוק את `GET /health` לפני הרצת האפליקציה.
-אוכל להמשיך וליישם את השלבים הבאים:
+📝 רישיון
+פרויקט זה נוצר כחלק מתיק עבודות אישי. כל הזכויות שמורות © 2026.

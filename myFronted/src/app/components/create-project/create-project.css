@@ -4,8 +4,11 @@
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 24px;
   padding: 2.5rem;
-  max-width: 600px;
+  max-width: 720px;
+  width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
   animation: slideDown 0.5s ease-out;
 }
@@ -13,8 +16,9 @@
 .form-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
 .icon-wrapper { width: 56px; height: 56px; background: rgba(99, 102, 241, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #818cf8; }
 .icon-wrapper svg { width: 28px; }
-.form-header h3 { margin: 0; font-size: 1.8rem; color: #fff; }
-.form-header p { margin: 0; color: #94a3b8; }
+.title-wrapper { display:flex; flex-direction:column }
+.title-wrapper h3 { margin: 0; font-size: 1.8rem; color: #fff; }
+.title-wrapper p { margin: 0; color: #94a3b8; }
 
 .input-group { margin-bottom: 1.5rem; }
 .input-group label { display: block; margin-bottom: 0.8rem; color: #e2e8f0; font-size: 0.9rem; }
@@ -46,3 +50,53 @@ select option { background: #0f172a; color: #fff; }
 .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 0.8rem 1.8rem; border-radius: 12px; cursor: pointer; }
 
 @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsive adjustments */
+@media (max-width: 880px) {
+  .create-project-container { padding: 1.6rem; max-width: 640px }
+}
+
+@media (max-width: 520px) {
+  .create-project-container { border-radius: 16px; padding: 1rem; margin: 1rem; }
+  .form-header { gap: 0.8rem }
+  .icon-wrapper { width: 44px; height: 44px }
+  .title-wrapper h3 { font-size: 1.25rem }
+  .actions { flex-direction: column-reverse; gap: 8px; justify-content: stretch }
+  .btn-primary, .btn-secondary { width: 100%; }
+}
+
+/* Modal backdrop/dialog */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.75));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  z-index: 1200;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.create-project-container {
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+}
+
+/* make header visually stand out */
+.form-header { align-items: center; }
+.icon-wrapper { box-shadow: 0 6px 18px rgba(99,102,241,0.08); }
+
+/* subtle inner padding for inputs */
+.select-wrapper, .input-field-wrapper { padding: 8px; }
+
+/* emphasis on CTA */
+.btn-primary { box-shadow: 0 10px 30px rgba(99,102,241,0.14); }
