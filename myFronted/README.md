@@ -44,17 +44,17 @@ cd nexus-flow
 התקנת תלויות:
 
 Bash
-# עבור השרת
+### עבור השרת
 cd server
 npm install
 
-# עבור הקליינט
+### עבור הקליינט
 cd ../client
 npm install
 הרצת הפרויקט:
 
 Bash
-# הפעלת השרת
+### הפעלת השרת
 node server.js
 
 # הפעלת האנגולר (בטרמינל נפרד)
@@ -79,8 +79,7 @@ nexus-flow/
 ### 📊 Real-time Dashboard
 
 התחברות והרשמה בכניסה למערכת .
-![Login Screenshot](login.png)
-
+![Login Screenshot](login.PNG)
 
 ### ✅ Teams Management
 מערכת הצוותים עם אפשרות להוסםת צוות
