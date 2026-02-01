@@ -11,7 +11,7 @@ export class Toast {
       el.setAttribute('aria-live', 'polite');
 
       document.body.appendChild(el);
-      // trigger fade in
+    
       requestAnimationFrame(() => el.classList.add('app-toast--visible'));
 
       setTimeout(() => {

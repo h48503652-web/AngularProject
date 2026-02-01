@@ -5,10 +5,12 @@ import { Comments } from '../comments/comments';
 import { Toast } from '../../services/toast';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-tasks',
-  imports: [CreateTask,Comments],
+  standalone: true,
+  imports: [CreateTask, Comments,Icon],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
 })
@@ -21,7 +23,11 @@ export class Tasks {
   tasks = signal<any[]>([]);
   expandedTaskId = signal<number | null>(null);
   loading = signal(true);
+  
+  // משתנים לשליטה בטופס (יצירה/עריכה)
   showCreateForm = signal(false);
+  editingTask = signal<any>(null); 
+
   projectId = signal<number | null>(null);
   updatingIds = signal<Set<number>>(new Set());
 
@@ -59,11 +65,27 @@ export class Tasks {
     });
   }
 
+ 
+
+  openCreateMode() {
+    this.editingTask.set(null); 
+    this.showCreateForm.set(true);
+  }
+
+  openEditMode(task: any) {
+    this.editingTask.set(task); 
+    this.showCreateForm.set(true);
+  }
+
+  closeForm() {
+    this.showCreateForm.set(false);
+    this.editingTask.set(null);
+  }
+
   toggleComplete(task: any) {
-  const newStatus = task.status === 'done' ? 'todo' : 'done';
-  
-  this.updateTask(task.id, { status: newStatus });
-}
+    const newStatus = task.status === 'done' ? 'todo' : 'done';
+    this.updateTask(task.id, { status: newStatus });
+  }
 
   isUpdating(taskId: number) {
     return this.updatingIds().has(taskId);
@@ -104,20 +126,18 @@ export class Tasks {
     });
   }
 
-removeTask(id: number) {
-  if (confirm('האם את בטוחה שברצונך למחוק את המשימה הזו?')) {
-    this.authService.deleteTask(id).subscribe({
-      next: () => {
-        // הסרת המשימה מהרשימה ב-Signal
-        this.tasks.update(allTasks => allTasks.filter(t => t.id !== id));
-      },
-      error: (err) => this.toast.show('שגיאה במחיקת המשימה: ' + (err.error?.error ?? ''), 'error')
-    });
+  removeTask(id: number) {
+    if (confirm('האם את בטוחה שברצונך למחוק את המשימה הזו?')) {
+      this.authService.deleteTask(id).subscribe({
+        next: () => {
+          this.tasks.update(allTasks => allTasks.filter(t => t.id !== id));
+        },
+        error: (err) => this.toast.show('שגיאה במחיקת המשימה: ' + (err.error?.error ?? ''), 'error')
+      });
+    }
   }
-}
-toggleComments(taskId: number) {
-  // אם לוחצים על אותה משימה - היא תיסגר. אם על אחרת - היא תיפתח.
-  this.expandedTaskId.update(id => id === taskId ? null : taskId);
-}
 
+  toggleComments(taskId: number) {
+    this.expandedTaskId.update(id => id === taskId ? null : taskId);
+  }
 }

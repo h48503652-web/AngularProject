@@ -11,7 +11,7 @@ export class Auth {
   private http = inject(HttpClient);
   private API_URL = environment.apiBaseUrl;
 
-  // in-memory token for runtime safety
+ 
   private token: string | null = null;
 
   currentUser = signal<any>(null);
@@ -19,8 +19,7 @@ export class Auth {
 
   constructor(){
     const sessionToken = sessionStorage.getItem('token');
-    const localToken = localStorage.getItem('token');
-    const token = sessionToken ?? localToken;
+    const token = sessionToken;
     if(token) {
       this.token = token;
     }
@@ -44,7 +43,6 @@ export class Auth {
   }
 
   private handleAuth(res: any){
-  // store token in-memory and persist to sessionStorage (safer than localStorage)
   this.token = res.token;
   try { sessionStorage.setItem('token', res.token); } catch (e) {}
   try { sessionStorage.setItem('user', JSON.stringify(res.user)); } catch (e) {}
@@ -56,7 +54,6 @@ export class Auth {
     this.token = null;
     try { sessionStorage.removeItem('token'); } catch (e) {}
     try { sessionStorage.removeItem('user'); } catch (e) {}
-    try { localStorage.removeItem('token'); } catch (e) {}
     this.currentUser.set(null);
   }
 
@@ -65,8 +62,6 @@ export class Auth {
     if (this.token) return this.token;
     const s = sessionStorage.getItem('token');
     if (s) { this.token = s; return s; }
-    const l = localStorage.getItem('token');
-    if (l) { this.token = l; return l; }
     return null;
   }
 

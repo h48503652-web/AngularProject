@@ -2,10 +2,11 @@ import { Component, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../services/auth';
 import { Toast } from '../../services/toast';
+import { Icon } from "../icon/icon";
 
 @Component({
   selector: 'app-create-team',
-   imports: [ReactiveFormsModule],
+   imports: [ReactiveFormsModule, Icon],
   templateUrl: './create-team.html',
   styleUrl: './create-team.css',
 })
@@ -21,7 +22,7 @@ export class CreateTeam {
   });
 
   cancel() {
-    this.close.emit(); // משדר לאמא: "תסגרי אותי"
+    this.close.emit(); 
   }
 
   createTeam() {

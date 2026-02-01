@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal, HostBinding } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Auth } from '../../services/auth';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive ,Icon],
   
   templateUrl: './header.html',
   styleUrl: './header.css',

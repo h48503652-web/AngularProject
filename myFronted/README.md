@@ -2,46 +2,40 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
 
-## Development server
+# MyFronted — Frontend (Angular)
 
-To start a local development server, run:
+מדריך קצר ומעשי להרצת ותחזוקת פרונטאנד הפרויקט.
+
+קבצי מקור עיקריים:
+- מקור: `src/` — רכיבים, שירותים, אינטרספטורים
+- תצורה: `src/environments/environment.ts` ו־`environment.prod.ts`
+- תיעוד API: `docs/API.md` (שרת: `WolfTasksServer-main/docs/API.md`)
+
+Prerequisites
+- Node 18+ ו‑npm
+- Angular CLI (מומלץ, לא חובה אם משתמשים ב‑npm scripts)
+
+התקנה והרצה בפיתוח
+1. התקנת תלויות:
 
 ```bash
+cd myFronted
+npm install
+```
+
+2. הרצת שרת פיתוח:
+
+```bash
+npm run start
+# או
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+פתחו את: `http://localhost:4200/`.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-# MyFronted
-
-מדריך מהיר לפרויקט הפרונטאנד (Angular)
-
-## חיבור ל־API (`apiBaseUrl`)
-
-הפרויקט משתמש בערכי סביבה בנתיב `src/environments` כדי להגדיר את כתובת ה־API:
-
-- `src/environments/environment.ts` — פיתוח (local)
-- `src/environments/environment.prod.ts` — פרודקשן
-
-הערך לשינוי הוא `apiBaseUrl`. דוגמה ל־`environment.ts`:
+הגדרת API (environment)
+- כתובת ה‑API נקבעת ב־`src/environments/environment.ts` באמצעות השדה `apiBaseUrl`.
+- דוגמה (dev):
 
 ```ts
 export const environment = {
@@ -50,44 +44,45 @@ export const environment = {
 };
 ```
 
-אם רוצים להשתמש ב־`.env` חיצוני, יש להגדיר תהליך build שיחליף משתנים אלה או לנהל אותם בזמן פריסה.
+הערה: הפרויקט משתמש ב־`sessionStorage` בלבד לאחסון ה‑JWT (אין שימוש ב‑localStorage).
 
-## התקנה והרצה מקומית
+מבנה ופיצ'רים חשובים (מה שמוממש את הדרישות)
+- Authentication: `src/app/services/auth.ts` — `login`, `register`, `logout`, `getToken`, `currentUser`.
+- Interceptor: `src/app/interceptors/auth-interceptor.ts` — מוסיף `Authorization: Bearer <token>`, מטפל ב‑401/403.
+- Guard: `src/app/guards/auth.guard.ts` — מגן על ראוטים פרטיים.
+- Screens / Components:
+	- `src/app/components/login` — Login
+	- `src/app/components/register` — Register
+	- `src/app/components/teams` — Teams (list, create, add member)
+	- `src/app/components/projects` — Projects (list, create)
+	- `src/app/components/tasks` — Tasks (list per project, create/update/delete)
+	- `src/app/components/comments` — Comments (list/add)
+- Environments: `src/environments/environment.ts`, `environment.prod.ts`.
 
-1. התקנת תלויות:
+מה מומלץ לבדוק ידנית אחרי הרצה
+1. התחברות: וודאו ש־sessionStorage מכיל `token` לאחר login.
+2. קריאות מוגנות: בתעבורת הרשת (Network) בדקו שכל בקשה ל־`/api/*` כוללת header `Authorization: Bearer <token>`.
+3. Logout: לאחר logout אין token ב־sessionStorage וה־guard מנווט ל־/login.
 
-```powershell
-cd myFronted
-npm install
-```
+פיתוח נוסף מומלץ (אופציונלי)
+- להוסיף בדיקות E2E (Cypress/Playwright) לכיסוי זרימות: login → teams → projects → tasks → comments.
+- להריץ Lighthouse/axe לאaudit נגישות ולשפר ARIA/contrast בהתאם.
+- להוסיף מדיניות טיפול בטעויות 500/404 מרכזית או Retry/Backoff במקום שבו זה רלוונטי.
 
-2. הרצת סרבר פיתוח:
+מדריך פריסה מהיר (production)
+1. עדכון `src/environments/environment.prod.ts` עם כתובת ה‑API הייצורית.
+2. בנייה לפרודקשן:
 
-```powershell
-npm run start
+```bash
+npm run build
 # או
-ng serve
+ng build --configuration production
 ```
 
-הדפדפן יפתח בכתובת `http://localhost:4200/` (ברירת מחדל של Angular).
+3. פרסו את תיקיית ה־`dist` בהתאם לפלטפורמת ה‑hosting שלכם (Netlify/Render/Vercel/NGINX).
 
-3. ודאו שה־API רץ (למשל `http://localhost:3000`) וש־`environment.apiBaseUrl` מתאים.
+קישורים שימושיים
+- תיעוד ה‑API (שרת): `WolfTasksServer-main/docs/API.md`.
 
-## מהשינויים שבוצעו בפרויקט
-
-- הוספת `authGuard` והגנה על ראוטים פרטיים.
-- שינוי אחסון טוקן ל־in-memory + `sessionStorage` (המלצה על אבטחה).
-- אינטרספטור שמוסיף `Authorization: Bearer <token>` וטיפול גלובלי ב־401/403.
-- הוצאת כתובת ה־API לקבצי `environment`.
-- שירות `Toast` קל לתצוגת הודעות במקום `alert()`.
-- שדרוג שירותי `Auth` להחזיר `Observable` במקום `subscribe()` פנימי.
-- ניווט `Teams -> Projects` עם `teamId` כ־query param.
-
-## האם להמשיך?
-
+אם תרצה, אעדכן את ה־README עם הוראות פריסה מפורטות ל‑Render, אוסיף דוגמאות `curl` שימושיות להפעלת API מקומית, או אצרף סקריפט `npm run health` שיבדוק את `GET /health` לפני הרצת האפליקציה.
 אוכל להמשיך וליישם את השלבים הבאים:
-- להוסיף ARIA ושיפורי נגישות ברכיבים
-- לעדכן README בהוראות פריסה על Render
-- להריץ בדיקת build/compile כדי לאתר שגיאות TypeScript
-
-ספר/י לי מה להמשיך לבצע.

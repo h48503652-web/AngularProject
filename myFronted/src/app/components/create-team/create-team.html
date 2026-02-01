@@ -1,19 +1,10 @@
-<!-- <div class="create-team-box">
-  <form [formGroup]="teamForm" (ngSubmit)="createTeam()">
-    <label>שם הצוות:</label>
-    <input type="text" formControlName="name">
-    
-    <div class="actions">
-      <button type="submit" [disabled]="!teamForm.valid">שמור</button>
-      <button type="button" (click)="cancel()">ביטול</button> </div>
-  </form>
-</div> -->
+
 
 
 <div class="create-team-container">
   <div class="form-header">
     <div class="icon-wrapper">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <app-icon name="users" [size]="30"></app-icon>
     </div>
     <div>
       <h3>הקמת צוות חדש</h3>
@@ -41,7 +32,7 @@
       <button type="button" class="btn-secondary" (click)="cancel()">ביטול</button>
       <button type="submit" class="btn-primary" [disabled]="!teamForm.valid">
         <span>צור צוות</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+       <app-icon name="plus" [size]="16"></app-icon>
       </button>
     </div>
   </form>

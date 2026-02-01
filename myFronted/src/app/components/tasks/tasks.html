@@ -1,105 +1,3 @@
-<!-- <div class="tasks-page">
-    <div class="ambient-glow"></div>
-
-    <div class="header">
-        <div class="title-wrapper">
-            <h2>המרחב שלי</h2>
-            <p class="subtitle">ניהול משימות וביצועים בזמן אמת</p>
-        </div>
-
-        <button class="create-btn" (click)="showCreateForm.set(true)">
-            <span>+ משימה חדשה</span>
-        </button>
-    </div>
-
-    @if (showCreateForm()) {
-    <div class="form-overlay">
-        <app-create-task (close)="showCreateForm.set(false)" (taskCreated)="loadTasks()">
-        </app-create-task>
-    </div>
-    }
-
-    <div class="tasks-grid">
-        @for (let task of tasks()) {
-        <div class="task-card">
-            <div class="card-gradient-overlay"></div>
-
-            <div class="card-content">
-                <div class="card-top">
-                    <div class="task-avatar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path d="M20 6L9 17l-5-5"></path>
-                        </svg>
-                    </div>
-                    <div class="status-badge" [class.done]="task.status === 'done'">
-                        {{ task.status || 'בתהליך' }}
-                    </div>
-                </div>
-
-                <h3>{{ task.title }}</h3>
-                <p class="task-description">{{ task.description }}</p>
-
-                <div class="stats-row">
-                    <div class="stat-item">
-                        <span class="stat-value">#{{ task.project_id }}</span>
-                        <span class="stat-label">פרויקט</span>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-value">{{ task.id }}</span>
-                        <span class="stat-label">ID</span>
-                    </div>
-                </div>
-
-                <div class="task-editors" aria-label="עדכון סטטוס ועדיפות">
-                    <div class="task-editor">
-                        <span class="task-editor-label">סטטוס</span>
-                        <select class="task-editor-select" [disabled]="isUpdating(task.id)" [value]="task.status" (change)="onStatusChange(task, $event)">
-                            @for (opt of statusOptions; track opt.value) {
-                                <option [value]="opt.value">{{ opt.label }}</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="task-editor">
-                        <span class="task-editor-label">עדיפות</span>
-                        <select class="task-editor-select" [disabled]="isUpdating(task.id)" [value]="task.priority" (change)="onPriorityChange(task, $event)">
-                            @for (opt of priorityOptions; track opt.value) {
-                                <option [value]="opt.value">{{ opt.label }}</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-actions">
-                <label class="card-actions-label">פעולות
-                    מהירות</label>
-                <div class="action-footer">
-                    <button class="complete-btn" (click)="toggleComplete(task)">
-                        {{ task.status === 'completed' ? 'החזר לביצוע' : 'סמן כבוצע' }}
-                    </button>
-                    <div class="delete-btn" (click)="removeTask(task.id)">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-        } else {
-        <div class="no-data">
-            <div class="empty-icon">✨</div>
-            <p>כל המשימות הושלמו. הגיע הזמן לתכנן את היעד הבא.</p>
-        </div>
-        }
-    </div>
-</div> -->
-
 <div class="tasks-page" role="main" aria-label="ניהול משימות">
     <div class="ambient-glow"></div>
 
@@ -109,29 +7,28 @@
             <p class="subtitle">ניהול משימות וביצועים בזמן אמת</p>
         </div>
 
-        <button class="create-btn" (click)="showCreateForm.set(true)">
+        <button class="create-btn" (click)="openCreateMode()">
             <span>+ משימה חדשה</span>
         </button>
     </div>
 
     @if (showCreateForm()) {
     <div class="form-overlay">
-        <app-create-task (close)="showCreateForm.set(false)" (taskCreated)="loadTasks()">
+        <app-create-task [taskToEdit]="editingTask()" (close)="closeForm()" (taskSaved)="loadTasks()">
         </app-create-task>
     </div>
     }
 
     <div class="tasks-grid">
-         @for (task of tasks(); track task.id)  {
-        <div class="task-card" [class.is-expanded]="expandedTaskId() === task.id" role="article" aria-labelledby="task-title-{{task.id}}">
+        @for (task of tasks(); track task.id) {
+        <div class="task-card" [class.is-expanded]="expandedTaskId() === task.id" role="article"
+            aria-labelledby="task-title-{{task.id}}">
             <div class="card-gradient-overlay"></div>
 
             <div class="card-content">
                 <div class="card-top">
                     <div class="task-avatar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M20 6L9 17l-5-5"></path>
-                        </svg>
+                      <app-icon name="check"></app-icon>
                     </div>
                     <div class="status-badge" [class.done]="task.status === 'done'">
                         {{ task.status || 'בתהליך' }}
@@ -152,54 +49,39 @@
                         <span class="stat-label">ID</span>
                     </div>
                 </div>
-
-                <div class="task-editors" aria-label="עדכון סטטוס ועדיפות">
-                    <div class="task-editor">
-                        <span class="task-editor-label">סטטוס</span>
-                        <select class="task-editor-select" [disabled]="isUpdating(task.id)" [value]="task.status" (change)="onStatusChange(task, $event)">
-                            @for (opt of statusOptions; track opt.value) {
-                                <option [value]="opt.value">{{ opt.label }}</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="task-editor">
-                        <span class="task-editor-label">עדיפות</span>
-                        <select class="task-editor-select" [disabled]="isUpdating(task.id)" [value]="task.priority" (change)="onPriorityChange(task, $event)">
-                            @for (opt of priorityOptions; track opt.value) {
-                                <option [value]="opt.value">{{ opt.label }}</option>
-                            }
-                        </select>
-                    </div>
-                </div>
             </div>
 
             <div class="card-actions">
                 <label class="card-actions-label">פעולות מהירות</label>
                 <div class="action-footer">
-                    <button class="complete-btn" (click)="toggleComplete(task)" aria-pressed="{{ task.status === 'done' ? 'true' : 'false' }}" aria-label="{{ task.status === 'done' ? 'העבר למשימה פעילה' : 'סמן כבוצע' }}">
+                    <button class="complete-btn" (click)="toggleComplete(task)"
+                        aria-pressed="{{ task.status === 'done' ? 'true' : 'false' }}"
+                        aria-label="{{ task.status === 'done' ? 'העבר למשימה פעילה' : 'סמן כבוצע' }}">
                         {{ task.status === 'done' ? 'החזר לביצוע' : 'סמן כבוצע' }}
                     </button>
 
-                    <button class="comment-trigger" (click)="toggleComments(task.id)" aria-expanded="{{ expandedTaskId() === task.id ? 'true' : 'false' }}" aria-controls="comments-{{task.id}}">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                        </svg>
+                    <button class="comment-trigger" (click)="toggleComments(task.id)"
+                        aria-expanded="{{ expandedTaskId() === task.id ? 'true' : 'false' }}"
+                        aria-controls="comments-{{task.id}}">
+                      <app-icon name="message"></app-icon>
                         <span>תגובות</span>
                     </button>
 
-                    <div class="delete-btn" role="button" tabindex="0" (click)="removeTask(task.id)" aria-label="מחק משימה {{ task.title }}">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
+                    <button class="edit-btn" (click)="openEditMode(task)" aria-label="ערוך משימה">
+                        <app-icon name="edit"></app-icon>
+                    </button>
+
+                    <div class="delete-btn" role="button" tabindex="0" (click)="removeTask(task.id)"
+                        aria-label="מחק משימה {{ task.title }}">
+                        <app-icon name="trash"></app-icon>
                     </div>
                 </div>
             </div>
 
             @if (expandedTaskId() === task.id) {
-                <div id="comments-{{task.id}}" class="comments-section-container">
-                    <app-comments [taskId]="task.id"></app-comments>
-                </div>
+            <div id="comments-{{task.id}}" class="comments-section-container">
+                <app-comments [taskId]="task.id"></app-comments>
+            </div>
             }
         </div>
         } @empty {

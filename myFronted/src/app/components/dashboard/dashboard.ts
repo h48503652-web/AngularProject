@@ -2,10 +2,11 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { Auth } from '../../services/auth';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink ,Icon],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -13,14 +14,14 @@ export class Dashboard {
 
   private authService = inject(Auth);
   
-  // משתנה עבור התאריך בכותרת
+  
   now = new Date();
 
   projects = signal<any[]>([]);
   tasks = signal<any[]>([]);
   loading = signal(true);
 
-  // --- חישובים ---
+
   totalProjects = computed(() => this.projects().length);
   
   pendingTasks = computed(() => 
@@ -35,7 +36,7 @@ export class Dashboard {
   });
 
   recentTasks = computed(() => {
-    return [...this.tasks()].sort((a, b) => b.id - a.id).slice(0, 4); // מציגים 4 אחרונות
+    return [...this.tasks()].sort((a, b) => b.id - a.id).slice(0, 4); 
   });
 
   ngOnInit() {
@@ -44,8 +45,6 @@ export class Dashboard {
 
   loadData() {
     this.loading.set(true);
-    // כאן אמור להיות הקוד ששולף את הנתונים (כמו בגרסה הקודמת)
-    // לצורך הדגמת העיצוב, נניח שהנתונים נטענים
     this.authService.getProjects().subscribe(data => this.projects.set(data));
     this.authService.getTasks().subscribe(data => {
         this.tasks.set(data);

@@ -3,10 +3,11 @@ import { Auth } from '../../services/auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProject } from '../create-project/create-project';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-projects',
-  imports: [ReactiveFormsModule,  CreateProject],
+  imports: [ReactiveFormsModule,  CreateProject, Icon],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
 })

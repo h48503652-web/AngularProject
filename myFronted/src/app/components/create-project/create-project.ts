@@ -2,10 +2,11 @@ import { Component, EventEmitter, Output, signal, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../services/auth';
 import { Toast } from '../../services/toast';
+import { Icon } from "../icon/icon";
 
 @Component({
   selector: 'app-create-project',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Icon],
   templateUrl: './create-project.html',
   styleUrl: './create-project.css',
 })
@@ -15,7 +16,7 @@ export class CreateProject {
   @Output() projectCreated = new EventEmitter<void>();
 
   projectForm: FormGroup;
-  teams = signal<any[]>([]); // רשימת הצוותים לבחירה
+  teams = signal<any[]>([]); 
 
   constructor(private fb: FormBuilder, private authService: Auth) {
     this.projectForm = this.fb.group({
@@ -28,12 +29,10 @@ export class CreateProject {
   private toast = inject(Toast);
 
   ngOnInit() {
-    // טעינת הצוותים כדי שהמשתמש יוכל לבחור אחד
     this.authService.getTeams().subscribe({
       next: (data) => this.authService.teams.set(data),
       error: () => console.error('Failed to load teams')
     });
-    // שימוש ב-Signal של הצוותים מה-Service
     this.teams = this.authService.teams;
   }
 

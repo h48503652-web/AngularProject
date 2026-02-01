@@ -2,10 +2,11 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Auth } from '../../services/auth';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {  DatePipe } from '@angular/common';
+import { Icon } from "../icon/icon";
 
 @Component({
   selector: 'app-comments',
-  imports: [ReactiveFormsModule,DatePipe],
+  imports: [ReactiveFormsModule, DatePipe, Icon],
   templateUrl: './comments.html',
   styleUrl: './comments.css',
 })
@@ -14,10 +15,10 @@ export class Comments {
 @Input({ required: true }) taskId!: number;
   private authService = inject(Auth);
 
-  // שימוש ב-Signal לניהול רשימת התגובות
+  
   comments = signal<any[]>([]);
   
-  // הדרך הנכונה: FormControl במקום ngModel
+
   commentControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   ngOnInit() {
@@ -38,9 +39,9 @@ export class Comments {
 
     this.authService.addComment(this.taskId, content).subscribe({
       next: (newComment) => {
-        // עדכון ה-Signal בצורה אימוטבילית
+       
         this.comments.update(prev => [...prev, newComment]);
-        this.commentControl.reset(); // ניקוי השדה
+        this.commentControl.reset(); 
         this.scrollToBottom();
       },
       error: (err) => console.error('Error sending comment', err)
