@@ -79,16 +79,19 @@ nexus-flow/
 ### 📊 Real-time Dashboard
 
 התחברות והרשמה בכניסה למערכת .
-![Login Screenshot](path/to/login.png)
+![Login Screenshot](login.png)
 
-סקירה מקיפה של התקדמות הפרויקטים והמשימות הפתוחות.
-![Dashboard Screenshot](path/to/dashboard.png)
+
+### ✅ Teams Management
+מערכת הצוותים עם אפשרות להוסםת צוות
+![Teams Screenshot](TEAMS!.PNG)
 
 ### ✅ Task Management
 מערכת גריד חכמה לניהול משימות, כולל סינון, עריכה ומעקב סטטוס.
-![Tasks Screenshot](path/to/TASKS!.PNG)
+![Tasks Screenshot](TASKS1.PNG)
 
-![alt text](CREATETASKS!.PNG)
+טופס יצירת משימה חדשה .
+![CreateTasks Screenshot](CREATETASKS!.PNG)
 
 📝 רישיון
 פרויקט זה נוצר כחלק מתיק עבודות אישי. כל הזכויות שמורות © 2026.
