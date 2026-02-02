@@ -1,5 +1,44 @@
+<!-- <div class="teams-page">
+  <div class="header">
+    <h2>הצוותים שלי</h2>
+    @if (!showCreateForm) {
+      <button (click)="showCreateForm = true">+ צוות חדש</button>
+    }
+  </div>
 
-<div class="teams-page" role="main" aria-label="ניהול צוותים">
+  @if (showCreateForm) {
+    <app-create-team (close)="showCreateForm = false"></app-create-team>
+  }
+
+  <div class="teams-grid">
+    @for (team of teams(); track team.id) {
+      <div class="team-card" (click)="goToProjects(team.id)">
+        <div class="card-content">
+          <h3>{{ team.name }}</h3>
+          <p>מספר חברים: {{ team.members_count }}</p>
+        </div>
+
+        <div class="card-actions">
+          <div class="add-member-wrapper">
+            <input #memberEmail 
+                   type="email" 
+                   placeholder="הוסף חבר (email)..." 
+                   (click)="$event.stopPropagation()"> <button class="icon-btn" 
+                    (click)="$event.stopPropagation(); addMember(team.id, memberEmail.value); memberEmail.value=''">
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="no-data">
+        <p>עדיין אין צוותים להצגה.</p>
+      </div>
+    }
+  </div>
+</div> -->
+
+<div class="teams-page">
   <div class="ambient-glow"></div>
 
   <div class="header">
@@ -9,8 +48,8 @@
     </div>
     
     @if (!showCreateForm) {
-      <button class="create-btn" (click)="showCreateForm = true" aria-label="צור צוות חדש">
-        <span class="icon" aria-hidden="true">+</span>
+      <button class="create-btn" (click)="showCreateForm = true">
+        <span class="icon">+</span>
         <span>צור צוות חדש</span>
       </button>
     }
@@ -23,9 +62,8 @@
   }
 
   <div class="teams-grid">
-    @if (teams() && teams().length) {
-      @for (team of teams(); track team.id) {
-        <div class="team-card" (click)="goToProjects(team.id)" role="button" tabindex="0" aria-label="פתח פרויקטים של {{ team.name }}">
+    @for (team of teams(); track team.id) {
+      <div class="team-card" (click)="goToProjects(team.id)">
         <div class="card-gradient-overlay"></div>
         
         <div class="card-content">
@@ -48,28 +86,21 @@
           </div>
         </div>
 
-          <div class="card-actions">
-            <label for="memberId-{{team.id}}">הוספת חבר מהירה</label>
-            <div class="input-group">
-              <input id="memberId-{{team.id}}" #memberId 
-                     type="number" 
-                     placeholder="הזן ID משתמש..." 
-                     (click)="$event.stopPropagation()" aria-label="הזן ID משתמש להוספה">
-              <button class="add-btn" aria-label="הוסף חבר לקבוצה {{ team.name }}"
-                      (click)="$event.stopPropagation(); addMember(team.id, memberId.value); memberId.value=''">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
-              </button>
-            </div>
-
-           
-            <button class="open-projects-btn" aria-label="פתח פרויקטים של {{ team.name }}" (click)="$event.stopPropagation(); goToProjects(team.id)">
-              <span class="icon" aria-hidden="true">📁</span>
-              <span class="label">פתיחת פרויקטים</span>
+        <div class="card-actions">
+          <label>הוספת חבר מהירה</label>
+          <div class="input-group">
+            <input #memberId 
+                   type="number" 
+                   placeholder="הזן ID משתמש..." 
+                   (click)="$event.stopPropagation()">
+            <button class="add-btn" 
+                    (click)="$event.stopPropagation(); addMember(team.id, memberId.value); memberId.value=''">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/></svg>
             </button>
           </div>
         </div>
-      }
-    } @else {
+      </div>
+    } @empty {
       <div class="no-data">
         <div class="empty-icon">📂</div>
         <p>עדיין אין כאן צוותים. הגיע הזמן ליצור את הראשון!</p>

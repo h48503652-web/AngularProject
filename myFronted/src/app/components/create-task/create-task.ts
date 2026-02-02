@@ -30,8 +30,8 @@ export class CreateTask implements OnInit {
   constructor() {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', Validators.required],
-      due_date: ['', Validators.required],
+      description: [''],
+      due_date: [''],
       projectId: ['', Validators.required],
       status: ['todo', Validators.required],
       priority: ['normal', Validators.required]
