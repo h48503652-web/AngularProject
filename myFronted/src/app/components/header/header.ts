@@ -1,7 +1,8 @@
-import { Component, computed, inject, signal, HostBinding } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, inject, signal, HostBinding, HostListener, ElementRef } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { Icon } from '../icon/icon';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class Header {
   @HostBinding('class.collapsed') get hostCollapsed() { return this.collapsed(); }
   private authService = inject(Auth);
   private router = inject(Router);
+  private elementRef = inject(ElementRef);
 
   userName = computed(() => {
     const user = this.authService.currentUser();
@@ -30,8 +32,32 @@ export class Header {
 
   collapsed = signal(false);
 
+  constructor() {
+    // Auto-close sidebar on route navigation
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      if (!this.collapsed()) {
+        this.collapsed.set(true);
+      }
+    });
+  }
+
   toggleCollapsed() {
     this.collapsed.update(v => !v);
+  }
+
+  // Close sidebar when clicking outside on mobile
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const sidebar = this.elementRef.nativeElement.querySelector('.sidebar');
+    const toggleBtn = this.elementRef.nativeElement.querySelector('.collapse-btn');
+    
+    if (sidebar && !this.collapsed() && window.innerWidth < 768) {
+      if (!sidebar.contains(event.target as Node) && !toggleBtn?.contains(event.target as Node)) {
+        this.collapsed.set(true);
+      }
+    }
   }
 
   logout() {
