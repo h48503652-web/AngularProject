@@ -1,96 +1,84 @@
-🚀 NexusFlow - System for Team & Task Management
-NexusFlow היא פלטפורמה מודרנית לניהול פרויקטים ומשימות בזמן אמת, המיועדת לצוותים שרוצים לשפר את הפרודוקטיביות והסדר בארגון. המערכת מאפשרת ניהול היררכי של צוותים, פרויקטים ומשימות עם ממשק משתמש מתקדם וחוויית שימוש חלקה.
+# 🚀 NexusFlow | Enterprise Team & Task Management
 
-✨ תכונות עיקריות (Key Features)
-ניהול היררכי: הקמת צוותים, שיוך פרויקטים לצוותים ויצירת משימות מפורטות.
+<div align="center">
 
-לוח בקרה (Dashboard): סקירה כללית של ביצועים, אחוזי השלמה ופעילות אחרונה.
+![Angular Version](https://img.shields.io/badge/Angular-20-dd0031.svg?style=for-the-badge&logo=angular)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
-ניהול משימות חכם: עריכת סטטוס (Todo/In Progress/Done), עדיפויות ותאריכי יעד.
+**מערכת מתקדמת לניהול צוותים, פרויקטים ומשימות בזמן אמת.** פלטפורמה הוליסטית המעניקה חוויית משתמש מודרנית (UX) בשילוב ביצועים גבוהים.
 
-שיתוף פעולה: מערכת תגובות מובנית לכל משימה לשיח צוותי.
+[🌐 לצפייה בגרסת ה-Live ב-Render](https://nexus-flow-client.onrender.com/landing)
 
-ממשק משתמש (UI): עיצוב Dark Mode מודרני, מבוסס זכוכית (Glassmorphism) עם אנימציות חלקות.
+</div>
 
-אבטחה: מערכת הרשמה והתחברות (Authentication) מאובטחת.
+---
 
-🛠 טכנולוגיות (Tech Stack)
-Frontend
-Angular 18/20: שימוש ב-Signals, Standalone Components ו-Reactive Forms.
+## 🌟 סקירה כללית (Overview)
+**NexusFlow** נבנתה כמענה לצורך בניהול היררכי חכם של משימות בתוך ארגונים. המערכת מאפשרת הפרדה ברורה בין צוותים, שיוך פרויקטים לכל צוות, וניהול משימות פרטני לכל פרויקט – הכל תחת ממשק אחוד ומאובטח המבוסס על הארכיטקטורות החדישות ביותר.
 
-CSS3: עיצוב מתקדם, Flexbox/Grid ואנימציות מותאמות אישית.
+## ✨ תכונות עיקריות (Key Features)
+* **ניהול היררכי מלא:** יצירת צוותים, שיוך חברים, והקמת פרויקטים ייעודיים לכל צוות.
+* **לוח משימות אינטראקטיבי (Task Board):** ניהול מחזור חיים מלא של משימות (CRUD) הכולל סטטוסים ועדיפויות.
+* **שיתוף פעולה בזמן אמת:** מערכת תגובות מובנית לכל משימה המאפשרת שיח צוותי שוטף.
+* **אבטחה והרשאות:** הגנה על נתיבים (Guards) וניהול התחברות מאובטח מבוסס JWT Token.
+* **עיצוב פרימיום:** ממשק Dark Mode מודרני בסגנון **Glassmorphism** הכולל אנימציות CSS3 מתקדמות.
 
-Lucide/SVG Icons: מערכת אייקונים וקטורית וקלה.
+## 🛠 ארכיטקטורה וטכנולוגיות (Tech Stack)
 
-Backend
-Node.js & Express: שרת API מהיר ויציב.
+### Frontend (The Heart of NexusFlow)
+* **Angular 20:** ניצול מלא של יכולות הפרימוורק החדשות:
+    * **Signals:** לניהול מצב (State) ריאקטיבי יעיל ואופטימיזציה מקסימלית של ה-DOM.
+    * **Standalone Components:** מבנה אפליקציה מודרני, נקי וקל לתחזוקה.
+    * **HTTP Interceptors:** הזרקה אוטומטית של Auth Headers (Bearer Token) לכל קריאה.
+* **Reactive Forms:** ניהול טפסים מורכבים עם וולידציות צד-לקוח מתקדמות.
+* **Lucide Icons:** שימוש באייקונים וקטוריים קלים למראה נקי ומקצועי.
 
-PostgreSQL: בסיס נתונים רלציוני לניהול המידע.
+### Backend & Infrastructure
+* **Node.js & Express:** שרת API מהיר, יציב ומאובטח.
+* **PostgreSQL / SQLite:** ניהול נתונים רלציוני המבטיח שלמות נתונים.
+* **Render:** אירוח ענן מלא (Full-stack Deployment) עם CI/CD.
 
-Render: אירוח (Hosting) של השרת והקליינט.
+---
 
-🚀 הרצה מקומית (Getting Started)
-דרישות קדם:
-Node.js מותקן
+## 🚀 הרצה מקומית (Local Setup)
 
-Angular CLI מותקן
-
-שלבי התקנה:
-שיבוט הפרויקט:
-
-Bash
-git clone https://github.com/h48503652-web/AngularProject
+### 1. שיבוט הפרויקט
+```bash
+git clone [https://github.com/h48503652-web/AngularProject.git](https://github.com/h48503652-web/AngularProject.git)
 cd nexus-flow
-התקנת תלויות:
-
+2. הגדרת השרת (Server)
 Bash
-### עבור השרת
 cd server
 npm install
+npm start
+השרת יפעל בכתובת: http://localhost:3000
 
-### עבור הקליינט
-cd ../client
-npm install
-הרצת הפרויקט:
+3. הגדרת הקליינט (Client)
+פתח טרמינל חדש והרצי:
 
 Bash
-### הפעלת השרת
-node server.js
-
-# הפעלת האנגולר (בטרמינל נפרד)
+cd client
+npm install
 ng serve
-האתר יהיה זמין בכתובת: http://localhost:4200
+האפליקציה תהיה זמינה בדפדפן בכתובת: http://localhost:4200
 
 📂 מבנה הפרויקט (Project Structure)
 Plaintext
 nexus-flow/
-├── client/                # Angular Frontend
+├── client/                 # Angular 20 Source Code
 │   ├── src/app/
-│   │   ├── components/    # Reusable UI Components
-│   │   ├── services/      # API & Logic Services
-│   │   └── environments/  # Prod/Dev configurations
-├── server/                # Node.js Backend
-│   ├── server.js          # API Routes & Express Config
-│   └── database/          # SQL Schemas & DB Logic
-└── README.md
+│   │   ├── core/           # Interceptors, Guards & Global Models
+│   │   ├── services/       # Feature-based API Services (Signal-driven)
+│   │   ├── components/      # Reusable Shared UI Components
+│   │   └── pages/          # Main Views (Dashboard, Teams, Tasks)
+├── server/                 # Node.js Express Backend
+└── README.md               # Project Documentation
+📸 מבט מהמערכת (Snapshots)
+🔐 מסך התחברות והרשמה
+תהליך הזדהות מאובטח עם עיצוב זכוכית מודרני.
 
-## 📸 System Snapshots
+👥 ניהול צוותי עבודה
+ממשק ניהול צוותים המאפשר יצירה ומעקב אחר חברי הצוות.
 
-### 📊 Real-time Dashboard
-
-התחברות והרשמה בכניסה למערכת .
-![Login Screenshot](login.PNG)
-
-### ✅ Teams Management
-מערכת הצוותים עם אפשרות להוסםת צוות
-![Teams Screenshot](TEAMS!.PNG)
-
-### ✅ Task Management
-מערכת גריד חכמה לניהול משימות, כולל סינון, עריכה ומעקב סטטוס.
-![Tasks Screenshot](TASKS1.PNG)
-
-טופס יצירת משימה חדשה .
-![CreateTasks Screenshot](CREATETASKS!.PNG)
-
-📝 רישיון
-פרויקט זה נוצר כחלק מתיק עבודות אישי. כל הזכויות שמורות © 2026.
+פותח בהשקעה רבה כחלק ממטלת פיתוח ב-Angular. נשמח למשוב והצעות לשיפור! 🚀
